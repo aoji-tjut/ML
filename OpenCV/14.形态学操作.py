@@ -1,0 +1,21 @@
+import cv2 as cv
+
+src = cv.imread("./image/线.JPG")
+cv.namedWindow("src")
+cv.imshow("src", src)
+cv.moveWindow("src", 0, 0)
+row, col, channel = src.shape[:]
+kernel = cv.getStructuringElement(cv.MORPH_RECT, (5, 5))
+erode = cv.erode(src, kernel)
+dilate = cv.dilate(src, kernel)
+open = cv.morphologyEx(src, cv.MORPH_OPEN, kernel)
+close = cv.morphologyEx(src, cv.MORPH_CLOSE, kernel)
+tophat = cv.morphologyEx(src, cv.MORPH_TOPHAT, kernel)
+blackhat = cv.morphologyEx(src, cv.MORPH_BLACKHAT, kernel)
+cv.imshow("erode", erode)
+cv.imshow("dilate", dilate)
+cv.imshow("open", open)
+cv.imshow("close", close)
+cv.imshow("tophat", tophat)
+cv.imshow("blackhat", blackhat)
+cv.waitKey(0)
