@@ -23,9 +23,8 @@ param_grid = [
 ]
 
 knn_clf = KNeighborsClassifier()
-# 寻找最佳超参数 n_jobs使用cpu核数 verbose时刻输出信息，值越大越详细
-grid_search = GridSearchCV(knn_clf, param_grid, n_jobs=-1, verbose=2)
-grid_search.fit(X_train, y_train)  # 拟合
-print("score =", grid_search.score(X_test, y_test))  # 先对X_test预测y_predict 再结合y_test进行评估 得到模型准确率
-print("best_estimator_ =", grid_search.best_estimator_)  # 最佳参数
+grid_search = GridSearchCV(knn_clf, param_grid, n_jobs=-1, verbose=2)  # 寻找最佳超参数 n_jobs使用cpu核数 verbose时刻输出信息 值越大越详细
+grid_search.fit(X_train, y_train)
+print("best_score_ =", grid_search.best_score_)  # 最佳得分
+print("best_params_ =", grid_search.best_params_)  # 最佳参数
 knn_clf = grid_search.best_estimator_  # 保存最佳分类器

@@ -12,12 +12,13 @@ X = iris.data
 y = iris.target
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
-scaler = StandardScaler()  # 实例化
-scaler.fit(X_train)  # 拟合X_train
-print("mean_ =", scaler.mean_)  # 均值
-print("scale_ =", scaler.scale_)  # 标准差
-X_train_scaler = scaler.transform(X_train)  # 返回归一化结果 X_train本身不改变
-X_test_scaler = scaler.transform(X_test)  # 测试集也用训练集拟合的模型进行归一化
+ss = StandardScaler()
+ss.fit(X_train)
+print("mean_ =", ss.mean_)  # 均值
+print("var_ =", ss.var_)  # 方差
+print("scale_ =", ss.scale_)  # 标准差
+X_train_scaler = ss.transform(X_train)  # 返回归一化结果 X_train本身不改变
+X_test_scaler = ss.transform(X_test)  # 测试集也用训练集拟合的模型进行归一化
 
 plt.figure("X_train_scaler")
 plt.scatter(train, X_train_scaler[:, 0], alpha=0.4)
