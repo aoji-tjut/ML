@@ -1,44 +1,29 @@
-import numpy as np
-import matplotlib.pyplot as plt
+from math import sqrt
 from sklearn.linear_model import LinearRegression
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import r2_score
+from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 
-boston = datasets.load_boston()  # 13维
+boston = datasets.load_boston()  # [506, 13]
 X = boston.data
 y = boston.target
-X = X[y < 50.0]
-y = y[y < 50.0]
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=666)
 line_reg = LinearRegression()
 line_reg.fit(X_train, y_train)
 y_predict = line_reg.predict(X_test)
+
 print("k =", line_reg.coef_)  # 正数正相关 负数负相关 绝对值越大相关程度越大
 print("b =", line_reg.intercept_)
 print("score =", line_reg.score(X_test, y_test))
+print("mse =", mean_squared_error(y_test, y_predict))
+print("rmse =", sqrt(mean_squared_error(y_test, y_predict)))
+print("mae =", mean_absolute_error(y_test, y_predict))
 print("r2_score =", r2_score(y_test, y_predict))
-
-# x = np.linspace(0, 10, 50)
-# X = x.reshape(-1, 1)  # X矩阵用在fit、predict、score
-# noise = np.random.uniform(-1, 1, 50)
-# y = 2 * x + 5 + noise
-#
-# line_reg = LinearRegression()
-# line_reg.fit(X, y)
-# y_predict = line_reg.predict(X)
-#
-# plt.figure("Linear Regression")
-# plt.scatter(x, y, color="blue")
-# plt.plot(x, y_predict, color="red")
-# plt.axis([-1, 30, 1, 30])
-# plt.show()
 
 '''
 参数含义：
-1.fit_intercept:布尔值，指定是否需要计算线性回归中的截距，即b值。如果为False,
-那么不计算b值。
+1.fit_intercept:布尔值，指定是否需要计算线性回归中的截距，即b值。如果为False，那么不计算b值。
 2.normalize:布尔值。如果为False，那么训练样本会进行归一化处理。
 3.copy_X：布尔值。如果为True，会复制一份训练数据。
 4.n_jobs:一个整数。任务并行时指定的CPU数量。如果取值为-1则使用所有可用的CPU。

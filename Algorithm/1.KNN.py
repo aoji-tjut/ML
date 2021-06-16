@@ -1,34 +1,34 @@
-import numpy as np
 import matplotlib.pyplot as plt
-from sklearn.neighbors import KNeighborsClassifier, KNeighborsRegressor
+from sklearn.neighbors import KNeighborsClassifier, KNeighborsRegressor  # 非参数学习
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
 
 # 分类------------------------------------------------------------------------------------------------------------------
-X = np.array([[3, 2], [3, 1], [1, 3], [3, 4], [2, 2], [7, 4], [5, 3], [9, 2], [7, 3], [7, 0]])
-y = np.array([0, 0, 0, 0, 0, 1, 1, 1, 1, 1])
+iris = datasets.load_iris()  # [150,4]
+X = iris.data[:, :2]
+y = iris.target
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 knn_clf = KNeighborsClassifier()  # 默认k=5
-knn_clf.fit(X, y)
-print("[3,3]类别：", knn_clf.predict([[3, 3]]))
-print("[8,3]类别：", knn_clf.predict([[8, 3]]))
+knn_clf.fit(X_train, y_train)
+print("score =", knn_clf.score(X_test, y_test))
+print("X_test[0, 0] =", knn_clf.predict(X_test[0].reshape(1, -1))[0])
 
 plt.figure("KNN Classifier")
-plt.scatter(X[:, 0], X[:, 1], c='r')
-plt.scatter(3, 3, c='b')
-plt.scatter(8, 3, c='b')
+plt.scatter(X[y == 0, 0], X[y == 0, 1])
+plt.scatter(X[y == 1, 0], X[y == 1, 1])
+plt.scatter(X[y == 2, 0], X[y == 2, 1])
+plt.scatter(X_test[0, 0], X_test[0, 1], c='r')
 plt.show()
 
 # 回归------------------------------------------------------------------------------------------------------------------
-boston = datasets.load_boston()
+boston = datasets.load_boston()  # [506, 13]
 X = boston.data
 y = boston.target
-X = X[y < 50.0]
-y = y[y < 50.0]
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 knn_reg = KNeighborsRegressor()
-knn_reg.fit(X_test, y_test)
+knn_reg.fit(X_train, y_train)
 print("score =", knn_reg.score(X_test, y_test))
 
 '''

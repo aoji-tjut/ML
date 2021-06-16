@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="4193d978-fbf2-462f-8f94-026067634734" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Algorithm/0.SaveModel.py" beforeDir="false" afterPath="$PROJECT_DIR$/Algorithm/0.SaveModel.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -234,5 +233,9 @@
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state width="430" height="951" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1623772423904" />
+    <state x="505" y="233" key="search.everywhere.popup" timestamp="1623773192692">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="505" y="233" key="search.everywhere.popup/0.0.1680.1050@0.0.1680.1050" timestamp="1623773192692" />
   </component>
 </project>
