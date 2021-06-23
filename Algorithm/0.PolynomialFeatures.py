@@ -4,6 +4,7 @@ from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import Pipeline
+from sklearn.metrics import r2_score
 
 x = np.random.uniform(-3, 3, 100)
 X = x.reshape(-1, 1)
@@ -18,9 +19,12 @@ poly.fit(X)
 X_poly = poly.transform(X)  # 增维转换为多项式特征 X_poly[:,0]为x的0次幂,X_poly[:,1]为x的1次幂,X_poly[:,2]为x的2次幂
 line_reg = LinearRegression()
 line_reg.fit(X_poly, y)
+print("x^2系数 =", line_reg.coef_[2])
+print("x^1系数 =", line_reg.coef_[1])
+print("x^0系数 =", line_reg.coef_[0])
+print("常数 =", line_reg.intercept_)
 y_predict = line_reg.predict(X_poly)
-print("x^2系数 = %f\nx^1系数 = %f\nx^0系数 = %f\n常数 = %f" % (
-    line_reg.coef_[2], line_reg.coef_[1], line_reg.coef_[0], line_reg.intercept_))
+print(r2_score(y, y_predict))
 
 plt.sca(ax1)
 plt.title("poly+line_reg")
@@ -36,6 +40,7 @@ pipe = Pipeline([
 ])
 pipe.fit(X, y)
 y_predict = pipe.predict(X)
+print(r2_score(y, y_predict))
 
 plt.sca(ax2)
 plt.title("pipe")

@@ -12,15 +12,16 @@ best_score, best_k, best_p = 0, 0, 0
 for k in range(1, 11):
     for p in range(1, 6):
         knn_clf = KNeighborsClassifier(weights="distance", n_neighbors=k, p=p, n_jobs=-1)
-        scores = cross_val_score(knn_clf, X_train, y_train)  # 交叉验证 cv=分组数 极端情况：留一法
+        scores = cross_val_score(knn_clf, X_train, y_train, cv=5)  # 交叉验证 cv=分组数 极端情况：留一法 1个做验证 n-1个做训练
         score = np.mean(scores)
+        print("k = %d, p = %d, score =" % (k, p), scores)
         if score > best_score:
             best_score, best_k, best_p = score, k, p
 print("best_score =", best_score)
 print("best_k =", best_k)
 print("best_p =", best_p)
 
-#得到最佳超参数后 重新创建模型拟合预测
+# 得到最佳超参数后 重新创建模型拟合预测
 knn_clf_best = KNeighborsClassifier(weights="distance", n_neighbors=best_k, p=best_p)
 knn_clf_best.fit(X_train, y_train)
 print("knn_clf_best.score =", knn_clf_best.score(X_test, y_test))
