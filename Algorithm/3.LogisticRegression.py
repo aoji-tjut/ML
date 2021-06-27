@@ -31,7 +31,7 @@ def pipe(degree, C, penalty, multi_class='auto', solver="lbfgs"):
     ])
 
 
-iris = datasets.load_iris()
+iris = datasets.load_iris()  # [150,4]
 plt.figure("Logistic Regression", (7.5, 7.5))
 ax1 = plt.subplot(2, 2, 1)
 ax2 = plt.subplot(2, 2, 2)
@@ -49,9 +49,9 @@ log_reg = LogisticRegression()
 log_reg.fit(X_train, y_train)
 y_predict = log_reg.predict(X_test)
 print("score1 =", log_reg.score(X_test, y_test))
-print("precision_score1 =", precision_score(y_test, y_predict))  # 精准率
-print("recall_score1 =", recall_score(y_test, y_predict))  # 召回率
-print("f1_score1 =", f1_score(y_test, y_predict))  # f1-score
+print("precision_score1 =", precision_score(y_test, y_predict))
+print("recall_score1 =", recall_score(y_test, y_predict))
+print("f1_score1 =", f1_score(y_test, y_predict))
 print()
 
 plt.sca(ax1)
